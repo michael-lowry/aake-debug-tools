@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aake-debug-tools
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aake-debug-tools
+  template:
+    metadata:
+      name: aake-debug-tools
+      labels:
+        app: aake-debug-tools
+        version: 1.3.5
+    spec:
+      serviceAccountName: aake-pod-patcher
+      containers:
+      - name: aake-debug-tools
+        image: docker.mycompany.com/aake-debug-tools:1.3.5
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 200m
+        securityContext:
+          runAsNonRoot: false
+        tty: true
+        stdin: true
+        volumeMounts:
+        - name: logging
+          mountPath: /usr/server/tmp/log
+        - name: logging
+          mountPath: /usr/server/tmp/trace
+      volumes:
+      - name: logging
+        persistentVolumeClaim:
+          claimName: pvc-logs-nfs-aake
