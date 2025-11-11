@@ -41,12 +41,13 @@
 # 1.3.3			2025.11.06		Better exclusion of stopped processes in ae_logs() using U00003432.
 # 1.3.4			2025.11.06		Better identification of O and R role WPs.
 # 1.3.5			2025.11.06		Fixed double timestamp parsing in wp_mode_latest().
+# 1.3.6			2025.11.11		Fixed missing UC4_Log_Dir path in jwp_roles().
 
 # Set shell options
 shopt -s extglob # Extended globbing enables lists like '@(A|B|C)'
 
 # Script version
-AAKE_Debug_Tools_Version="1.3.5"
+AAKE_Debug_Tools_Version="1.3.6"
 
 # Use JWT token & CA cert of service account.
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
@@ -396,7 +397,7 @@ AWK
   # newest → oldest; stop after first file that yields a match
   local g file
   for g in 00 01 02 03 04 05 06 07 08 09 10; do
-    file="WPsrv_log_${num}_${g}.txt"
+    file="${UC4_Log_Dir}/WPsrv_log_${num}_${g}.txt"
     [ -f "$file" ] || continue
 
     # Run gawk on the file; ignore exit status; detect success by output bytes.
@@ -1035,3 +1036,4 @@ set_env_values
 if [[ -x $(which kubectl) ]]; then
 	kubectl_available="true"
 fi
+
