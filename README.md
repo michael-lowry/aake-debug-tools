@@ -12,12 +12,12 @@ A set of tools designed to aid troubleshooting Automic Automation Kubernetes Edi
 * The script must be run in a Linux pod running in the same cluster as the AAKE server.
 * The pod must have access to the AAKE logs, e.g., via NFS.
 * Tools like bash, gawk, kubectl, ls, grep, cut, and tail must be available. They are included in the Docker image provided.
-* The default service account must be enabled, and must have PATCH access to all pods in the cluster. This is also provided via the deployment manifest and RBAC definition file.
-* The no_proxy environment variable may need to be adjusted depending on how networking is configured in your cluster.
+* The default service account must be enabled, and must have PATCH access to all pods in the cluster. This is also provided via the provided deployment manifest and RBAC definition file.
+* The `no_proxy` environment variable may need to be adjusted depending on how networking is configured in your cluster.
 
 ## Instructions
 1. Build the docker image and push it to your container repository.
-2. Edit the deployment manifest to point to the image, e.g., `repository:aake-debug-tools:latest.`
+2. Edit the deployment manifest to point to the image, e.g., `<repository>/aake-debug-tools:latest.`
 3. Edit the shell script for your environment. Set the path to the logs in the `UC4_Log_Dir` variable. Adjust the namespaces if necessary.
 4. Deploy the pod and RBAC definitions to your cluster, e.g., using `kubectl apply -f <filename>`
 5. SSH into the pod, e.g, using the 's' key in K9s.
