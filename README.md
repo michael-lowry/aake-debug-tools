@@ -54,7 +54,7 @@ The shell script does its magic by parsing Automation Engine log files, looking 
 * `pwp()` — Identify the Primary Work Process by searching recent logs for message U00003475 & U00011818.
   The PWP log is then read to determine the system name & version.
 * `search_logs()` — Starting with the 00-generation logs and then proceeding if necessary to older logs, search for messages matching a given pattern.
-* `ae_logs()` & `ae_proc()` — Identify _running_ AE server processes by searching for 00-generation logs that do not have one of these messages near the end: U00003401, U00003410, U00003432.
+* `ae_logs()` & `ae_proc()` — Identify _running_ AE server processes by finding the 00-generation logs that do not have message U00003401, U00003410, or U00003432 near the end.
 * `aewp()`, `aecp()`, `owp()`, `rwp()`, `jwp()` — Identify process types based on message U02000090.
 * `restp()` — Identify REST processes based on message U00003400.
 * `jwp_roles()` — Identify JPW role based on message U00045395.
