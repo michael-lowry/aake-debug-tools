@@ -26,15 +26,14 @@ A set of tools designed to aid troubleshooting Automic Automation Kubernetes Edi
 
 ## Detailed discussion
 ### Background
-In the Automic Web Interface (AWI), the _Automation Engine Management_ /  _Processes and Utilization_ view of the _Administration_ perspective lists the details of AE server processes, including:
+In the Automic Web Interface (AWI), the view _Administration_ → _Automation Engine Management_ →  _Processes and Utilization_ lists the details of AE server processes, including:
 * AE process name, (WP001, CP005, etc.)
 * Process type (WP, CP, JWP, JCP, or REST)
 * Process role, (Primary, Output, Resources, Dialog, Authentication, Index, Performance, Utility, etc.)
 * Pod/host name, e.g., wp-0-7b895f69dd-xmnrb
 * etc.
   
-When viewing an AAKE cluster using K9s or `kubectl` however, only the pod name is visible. The remaining details are not available to the cluster. This makes troubleshooting difficult, perticularly when the AWI is unavailable or not responsive.
-I developed the AAKE Debug Tools to address this gap in functionality.
+When viewing the pods of an AAKE cluster using K9s or `kubectl` however, only the pod names are visible. The remaining details such as AE process name, type, and role, are not available to the cluster. This makes troubleshooting difficult, perticularly in situations wherein the AWI is unavailable or nonresponsive. I developed the AAKE Debug Tools to address this gap in functionality.
 
 ### Components
 The package consists of:
