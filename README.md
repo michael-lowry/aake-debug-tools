@@ -56,7 +56,7 @@ The shell script does its magic by parsing Automation Engine log files, looking 
 * `ae_logs()` & `ae_proc()` — Identify _running_ AE server processes by finding the 00-generation logs that do not have message U00003401, U00003410, or U00003432 near the end.
 * `aewp()`, `aecp()`, `owp()`, `rwp()`, `jwp()` — Identify process types based on message U02000090.
 * `restp()` — Identify REST processes based on message U00003400.
-* `jwp_roles()` — Identify JPW role based on message U00045395.
+* `jwp_roles()` — Identify JWP role based on message U00045395.
 * `wp_mode_latest()` — Identify WP/DWP status of each WP, based on messages U00003400 & U00003389.
 * `k8s_labels_init()`, `k8s_labels_add()`, & `k8s_labels_emit()` — Add labels to pods.
 * `ae()` — Main function. Use all of the above functions to list AE server processes and apply labels to pods.
