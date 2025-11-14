@@ -42,12 +42,13 @@
 # 1.3.4			2025.11.06		Better identification of O and R role WPs.
 # 1.3.5			2025.11.06		Fixed double timestamp parsing in wp_mode_latest().
 # 1.3.6			2025.11.11		Fixed missing UC4_Log_Dir path in jwp_roles().
+# 1.3.7			2025.11.14		Added label_pod() function to add labels to an individual pod.
 
 # Set shell options
 shopt -s extglob # Extended globbing enables lists like '@(A|B|C)'
 
 # Script version
-AAKE_Debug_Tools_Version="1.3.6"
+AAKE_Debug_Tools_Version="1.3.7"
 
 # Use JWT token & CA cert of service account.
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
@@ -887,6 +888,19 @@ k8s_labels_clear() {
 	__POD_LABELS=()
 }
 
+label_pod() {
+	if [[ $# -ne 5 ]]; then
+		echo "Usage: label_pod <pod_name> <ae process name> <type> <role(s)> <log>"
+		return 1
+	fi
+	pod=$1
+	proc=$2
+	type=$3
+	role=$4
+	log=$5
+kubectl patch pod $pod -p "{\"metadata\":{\"labels\":{\"proc\":\"$proc\",\"type\":\"$type\",\"role\":\"$role\",\"log\":\"$log\"}}}" --token=$TOKEN --server=$API_SERVER --certificate-authority=$CACERT
+}
+
 # Display information about running AE server processes, gleaned from logs.
 ae() {
 	echo "AAKE Debug Tools version: $AAKE_Debug_Tools_Version"
@@ -1036,4 +1050,3 @@ set_env_values
 if [[ -x $(which kubectl) ]]; then
 	kubectl_available="true"
 fi
-
