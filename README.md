@@ -59,4 +59,5 @@ The shell script does its magic by parsing Automation Engine log files, looking 
 * `jwp_roles()` — Identify JWP role based on message U00045395.
 * `wp_mode_latest()` — Identify WP/DWP status of each WP, based on messages U00003400 & U00003389.
 * `k8s_labels_init()`, `k8s_labels_add()`, & `k8s_labels_emit()` — Add labels to pods.
+* `label_pod()` — Label an individual pod; useful if the `ae()` function for some reason fails to label a pod.
 * `ae()` — Main function. Use all of the above functions to list AE server processes and apply labels to pods.
